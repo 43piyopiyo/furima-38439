@@ -19,13 +19,13 @@ has_many :orders
 ## Items table
 
 |Column            |Type       |Options                       |
-|name_id           |integer    |null: false                   |
-|detail_id         |integer    |null: false                   |
+|name              |string     |null: false                   |
+|detail            |text       |null: false                   |
 |category_id       |integer    |null: false                   |
-|condition         |string     |null: false                   |
-|delivery_free     |string     |null: false                   |
+|condition_id      |integer    |null: false                   |
+|delivery_free_id  |integer    |null: false                   |
 |prefecture_id     |integer    |null: false                   |
-|shipping_days     |string     |null: false                   |
+|shipping_day_id   |integer    |null: false                   |
 |price             |integer    |null: false                   |
 |user              |references |null: false, foreign_key:true |
 
