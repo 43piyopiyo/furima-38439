@@ -1,17 +1,15 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :login_unlogin
-
+  before_action :same_item
 
   def index
-    @item = Item.find(params[:item_id])
     @ordershipaddress = OrderShipAddress.new
   end
 
   def create
     @ordershipaddress = OrderShipAddress.new(ordershipaddress_params)
     if @ordershipaddress.valid?
-      @item = Item.find(params[:item_id])
       pay_item
       @ordershipaddress.save
       redirect_to root_path
@@ -30,6 +28,10 @@ class OrdersController < ApplicationController
       if current_user.id == @item.user_id || @item.order.present?
         redirect_to root_path
       end
+    end
+
+    def same_item
+      @item = Item.find(params[:item_id])
     end
 
     def pay_item
