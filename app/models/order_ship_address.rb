@@ -1,7 +1,6 @@
 class OrderShipAddress
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :address_detail, :apartment, :phone_number
-  attr_accessor :token
+  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :address_detail, :apartment, :phone_number, :token
 
   validates :user_id,                 presence: true
   validates :item_id,                 presence: true
@@ -18,8 +17,6 @@ class OrderShipAddress
 
   def save
     order = Order.create(user_id: user_id, item_id: item_id)
-    ShippingAddress.create(order_id: order.id, postal_code: postal_code, prefecture_id: prefecture_id, city: city, address_detail: address_detail, apartmet: apartment, phone_number: phone_number)
+    ShipAddress.create(order_id: order.id, postal_code: postal_code, prefecture_id: prefecture_id, city: city, address_detail: address_detail, apartment: apartment, phone_number: phone_number)
   end
 end
-
-
