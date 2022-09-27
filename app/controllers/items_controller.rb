@@ -51,8 +51,8 @@ class ItemsController < ApplicationController
   end
 
   def login_unlogin
-    unless current_user.id == @item.user_id
-      redirect_to action: :index
+    unless current_user.id == @item.user_id && @item.order == nil
+      redirect_to root_path
     end
   end
 
