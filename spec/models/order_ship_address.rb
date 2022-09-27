@@ -43,6 +43,11 @@ RSpec.describe OrderShipAddress, type: :model do
         @order_ship_address.valid?
         expect(@order_ship_address.errors.full_messages).to include("Prefecture can't be blank")
       end
+      it '都道府県が「---」だと保存できないこと' do
+        @order_ship_address.prefecture_id = 0
+        @order_ship_address.valid?
+        expect(@order_ship_address.errors.full_messages).to include("Prefecture can't be blank")
+      end
       it '市区町村が空だと保存できない' do
         @order_ship_address.city = ' '
         @order_ship_address.valid?

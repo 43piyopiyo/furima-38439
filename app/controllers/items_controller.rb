@@ -51,7 +51,7 @@ class ItemsController < ApplicationController
   end
 
   def login_unlogin
-    if current_user.id == @item.user_id || @item.order.present?
+    unless current_user.id == @item.user_id && @item.presence
       redirect_to root_path
     end
   end
