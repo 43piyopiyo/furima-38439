@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :login_unlogin
   before_action :same_item
-
+  before_action :login_unlogin
+  
   def index
     @ordershipaddress = OrderShipAddress.new
   end
@@ -23,15 +23,14 @@ class OrdersController < ApplicationController
       params.require(:order_ship_address).permit(:postal_code, :prefecture_id, :city, :address_detail, :apartment, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id].to_i, token: params[:token])
     end
 
-    def login_unlogin
+    def same_item
       @item = Item.find(params[:item_id])
+    end
+
+    def login_unlogin
       if current_user.id == @item.user_id || @item.order.present?
         redirect_to root_path
       end
-    end
-
-    def same_item
-      @item = Item.find(params[:item_id])
     end
 
     def pay_item
